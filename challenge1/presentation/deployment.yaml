@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kpmg-challenge1-presentation
+  namespace: interviews
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kpmg-challenge1-presentation
+  template:
+    metadata:
+      labels:
+        app: kpmg-challenge1-presentation
+    spec:
+      imagePullSecrets:
+        - name: gitlab-registry
+      containers:
+        - name: kpmg-challenge1-presentation
+          image: registry.gitlab.com/k8s-enabled-2019/kpmg.interviews.bajescu.com/challenge1/presentation
+          ports:
+            - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kpmg-challenge1-presentation
+  namespace: interviews
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+  selector:
+    app: kpmg-challenge1-presentation
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: kpmg-challenge1-presentation
+  namespace: interviews
+spec:
+  rules:
+    - host: challenge1.kpmg.interviews.bajescu.com
+      http:
+        paths:
+          - backend:
+              serviceName: kpmg-challenge1-presentation
+              servicePort: 80

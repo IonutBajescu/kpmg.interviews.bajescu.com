@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kpmg-challenge1-data
+  namespace: interviews
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kpmg-challenge1-data
+  template:
+    metadata:
+      labels:
+        app: kpmg-challenge1-data
+    spec:
+      imagePullSecrets:
+        - name: gitlab-registry
+      containers:
+        - name: kpmg-challenge1-data
+          image: registry.gitlab.com/k8s-enabled-2019/kpmg.interviews.bajescu.com/challenge1/data
+          env:
+            - name: PORT
+              value: "80"
+            - name: DATA_API
+              value: data.challenge1.kpmg.interviews.bajescu.com
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kpmg-challenge1-data
+  namespace: interviews
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+  selector:
+    app: kpmg-challenge1-data
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: kpmg-challenge1-data
+  namespace: interviews
+spec:
+  rules:
+    - host: data.challenge1.kpmg.interviews.bajescu.com
+      http:
+        paths:
+          - backend:
+              serviceName: kpmg-challenge1-data
+              servicePort: 80

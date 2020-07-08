@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Count the clicks</title>
+	<style>
+		body {
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<button id="addClick">Click me</button>
+	<p>
+		I've been clicked "<span id="numberOfClicks">Loading</span>" times.
+	</p>
+
+
+	<p>
+		<i>Every 5 clicks, you get a bonus message! The bonus can be seen by everyone.</i>
+	</p>
+
+	<script>
+		request("GET")
+
+		document.getElementById("addClick").onclick = function() {
+		    request("POST")
+		}
+
+        // I'm not really a front-end developer, so I'm going to keep the URL
+        // hardcoded here, since my js skills are not what I'm trying to showcase.
+        function request(method) {
+            const request = new XMLHttpRequest();
+            request.open(method, "https://application.challenge1.kpmg.interviews.bajescu.com/clicks");
+            request.send();
+
+            // We'd ideally also handle errors here
+            request.onreadystatechange = (e) => {
+                document.getElementById('numberOfClicks').textContent = request.responseText
+            }
+        }
+	</script>
+</body>
+</html>
