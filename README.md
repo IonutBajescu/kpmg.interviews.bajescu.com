@@ -1,6 +1,17 @@
 # KPMG Code Challenges
 Each individual challenge has a README.md in it explaining my approach and possible shortcuts that I had to take due to time constraints.
 
+## Deployment
+The demo for challenge1 has been deployed at https://challenge1.kpmg.interviews.bajescu.com, to ease the process of running the code. You can find the deployment code (yaml files for Kubernetes) in the directory specific to the microservice (application, data or presentation).
+
+The presentation tier is powered by https://application.kpmg.interviews.bajescu.com and https://data.kpmg.interviews.bajescu.com. The data tier would normally be protected by the firewall, but I've allowed outside http traffic in this case since this is only an exercise.
+
+There's no code in the deployment.yaml files for the SSL encryption, as that is applied to all services that get deployed to the cluster - which is something that we should use in any team.
+
+The applications are hosted on my personal Kubernetes cluster, and will be deleted in the foreseeable future.
+
+You could also run each service on your computer with `go run`, but I don't think that's worth doing.
+
 ## Monorepo vs Multiple Repositories
 Normally, each app would be in a different repository. To make it easier for the person reviewing the result though, I'll keep everything in a single repository.
 
