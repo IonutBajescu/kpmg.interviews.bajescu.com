@@ -11,6 +11,7 @@ import (
 
 var dataApi = os.Getenv("DATA_API")
 
+// This should be split in a separate function
 func main() {
 	http.HandleFunc("/clicks", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", "https://challenge1.kpmg.interviews.bajescu.com")
