@@ -4,7 +4,7 @@ Each individual challenge has a README.md in it explaining my approach and possi
 ## Deployment
 The demo for challenge1 has been deployed at https://challenge1.kpmg.interviews.bajescu.com, to ease the process of running the code. You can find the deployment code (yaml files for Kubernetes) in the directory specific to the microservice (application, data or presentation).
 
-The presentation tier is powered by https://application.kpmg.interviews.bajescu.com and https://data.kpmg.interviews.bajescu.com. The data tier would normally be protected by the firewall, but I've allowed outside http traffic in this case since this is only an exercise.
+The presentation tier is powered by https://application.challenge1.kpmg.interviews.bajescu.com and https://data.challenge1.kpmg.interviews.bajescu.com. The data tier would normally be protected by the firewall, but I've allowed outside http traffic in this case since this is only an exercise.
 
 There's no code in the deployment.yaml files for the SSL encryption, as that is applied to all services that get deployed to the cluster - which is something that we should use in any team.
 
